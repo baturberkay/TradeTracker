@@ -1,8 +1,6 @@
 FROM openjdk:21
-LABEL authors="xyz"
-
-RUN mvn clean install
+LABEL authors="baturdumanay"
 
 ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} tradeTracker.jar
-ENTRYPOINT ["java", "-jar", "tradeTracker.jar"]
+COPY ${JAR_FILE} TradeTracker.jar
+ENTRYPOINT ["java", "-jar", "TradeTracker.jar"]
