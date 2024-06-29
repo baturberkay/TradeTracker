@@ -1,4 +1,4 @@
-package com.interview.tradetracker;
+package com.interview.tradetracker.util;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;

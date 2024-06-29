@@ -1,2 +1,5 @@
-package com.interview.tradetracker.request;public class UpdatePriceRequest {
+package com.interview.tradetracker.request;
+
+public record UpdatePriceRequest(String name, Double newPrice) {
+
 }

@@ -1,9 +1,8 @@
 package com.interview.tradetracker.exception;
 
-public class StockAlreadyExistException extends Exception {
+public class StockNotFoundException extends Exception {
 
-  public StockAlreadyExistException(String stockName) {
-    super("Stock already exists: " + stockName);
+  public StockNotFoundException(String stockName) {
+    super("Stock not found: " + stockName);
   }
-
 }
