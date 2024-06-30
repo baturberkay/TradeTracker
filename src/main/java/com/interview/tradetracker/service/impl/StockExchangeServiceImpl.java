@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StockExchangeServiceImpl implements StockExchangeService {
@@ -48,14 +47,12 @@ public class StockExchangeServiceImpl implements StockExchangeService {
   }
 
   @Override
-  @Transactional
   public StockExchange getStocks(String stockExchangeName) throws StockExchangeNotFoundException {
     return stockExchangeRepository.findByName(stockExchangeName)
         .orElseThrow(() -> new StockExchangeNotFoundException(stockExchangeName));
   }
 
   @Override
-  @Transactional
   public void addStock(String stockExchangeName, String stockName)
       throws StockExchangeNotFoundException, StockNotFoundException, StockAlreadyExistInStockExchangeException {
     StockExchange stockExchange = getStockExchange(stockExchangeName);
@@ -70,7 +67,6 @@ public class StockExchangeServiceImpl implements StockExchangeService {
   }
 
   @Override
-  @Transactional
   public void deleteStock(String stockExchangeName, String stockName)
       throws StockExchangeNotFoundException, StockNotFoundException {
     StockExchange stockExchange = getStockExchange(stockExchangeName);
