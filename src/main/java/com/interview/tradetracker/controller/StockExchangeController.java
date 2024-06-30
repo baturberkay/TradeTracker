@@ -7,6 +7,7 @@ import com.interview.tradetracker.exception.StockExchangeNotFoundException;
 import com.interview.tradetracker.exception.StockNotFoundException;
 import com.interview.tradetracker.request.CreateStockExchangeRequest;
 import com.interview.tradetracker.service.StockExchangeService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,8 @@ public class StockExchangeController {
     this.stockExchangeService = stockExchangeService;
   }
 
-  // add operation and description
+  @Operation(summary = "Create stock exchange with required fields",
+      description = "Create Stock exchange through this endpoint")
   @PostMapping
   public ResponseEntity<HttpStatus> create(@RequestBody CreateStockExchangeRequest request)
       throws StockExchangeAlreadyExistException {
@@ -38,12 +40,16 @@ public class StockExchangeController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
+  @Operation(summary = "Get all stocks with stock exchange by stock exchange name",
+      description = "Get all stock details with stock exchange by stock exchange name")
   @GetMapping("/{name}")
   public ResponseEntity<StockExchange> getAllStocks(@PathVariable String name)
       throws StockExchangeNotFoundException {
     return ResponseEntity.ok(stockExchangeService.getStocks(name));
   }
 
+  @Operation(summary = "Add stock to stock exchange",
+      description = "Add stock to stock exchange by stock name and stock exchange name")
   @PutMapping("/{name}/stock/{stockName}")
   public ResponseEntity<HttpStatus> addStock(@PathVariable String name,
       @PathVariable String stockName)
@@ -52,6 +58,8 @@ public class StockExchangeController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
+  @Operation(summary = "Remove stock from stock exchange",
+      description = "Removes stock from stock exchange by stock name and stock exchange name")
   @DeleteMapping("/{name}/stock/{stockName}")
   public ResponseEntity<HttpStatus> deleteStock(@PathVariable String name,
       @PathVariable String stockName)

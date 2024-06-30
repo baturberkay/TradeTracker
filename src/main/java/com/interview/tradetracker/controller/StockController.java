@@ -5,6 +5,7 @@ import com.interview.tradetracker.exception.StockAlreadyExistException;
 import com.interview.tradetracker.exception.StockNotFoundException;
 import com.interview.tradetracker.request.UpdatePriceRequest;
 import com.interview.tradetracker.service.StockService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,8 @@ public class StockController {
     this.stockService = stockService;
   }
 
+  @Operation(summary = "Create stock with required fields",
+      description= "Create Stock through this endpoint")
   @PostMapping
   public ResponseEntity<HttpStatus> create(@RequestBody CreateStockRequest createStockRequest)
       throws StockAlreadyExistException {
@@ -35,6 +38,8 @@ public class StockController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
+  @Operation(summary = "Update price of an exist stock",
+      description= "Update stock price")
   @PutMapping
   public ResponseEntity<HttpStatus> updatePrice(@RequestBody UpdatePriceRequest request)
       throws StockNotFoundException {
@@ -42,6 +47,8 @@ public class StockController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
+  @Operation(summary = "Delete stock",
+      description= "Deletes an exist stock")
   @DeleteMapping
   public ResponseEntity<HttpStatus> delete(@RequestBody String name) throws StockNotFoundException {
     stockService.delete(name);
