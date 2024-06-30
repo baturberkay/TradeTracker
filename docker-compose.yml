@@ -1,8 +1,9 @@
-version: '3.7'
+version: '3.8'
 services:
-  tradeTrackerApp:
-    image: "docker-spring-boot:latest"
-    build: ..
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: trade_tracker
     depends_on:
       - db
